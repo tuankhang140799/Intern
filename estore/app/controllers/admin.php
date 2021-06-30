@@ -28,14 +28,14 @@ Class Admin extends Controller
 	    }
 
 	    $DB = Database::newInstance();
-        $categories = $DB->read("select * from categories order by id decs");
+        $categories = $DB->read("select * from categories order by id desc");
 
         $category = $this->load_model("Category");
         $tbl_rows = $category->make_table($categories);
-        if(is_array($category)){
-        	echo "here";
-		    $data['tbl_rows'] = $tbl_rows;
-	    }
+        $data['tbl_rows'] = "";
+        if(is_array($categories)){
+            $data['tbl_rows'] = $tbl_rows;
+        }
 
         $data['page_title'] = "Admin";
         $this->view("admin/categories",$data);

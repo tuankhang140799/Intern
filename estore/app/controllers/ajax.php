@@ -25,16 +25,16 @@ Class Ajax extends Controller
 				{
 					$arr['message'] = $_SESSION['error'];
 					$_SESSION['error'] = "";
-					$arr['message_type'] = "error";
+					$arr['message_type'] = "error"; 
 					$arr['data'] = "";
-					$arr['data_type'] = "add_new";
-					
+					$ar['data_type'] = "add_new" 
+
 					echo json_encode($arr);
 				}else
 				{
 					$arr['message'] = "Category added successfully!";
 					$arr['message_type'] = "info";
-					$cats = $category->get_all();
+					$cats = $category->get_all(); 
 					$arr['data'] = $category->make_table($cats);
 					$arr['data_type'] = "add_new";
 
@@ -44,11 +44,11 @@ Class Ajax extends Controller
 			if($data->data_type == 'disable_row')
 			{
 
-				$disabled = ($data->current_state == "Enabled") ? 1 : 0;
+				$disabled = ($data->current_state == "Enabled") ? 1 : 0 ;
 				$id = $data->id;
 
 
-				$query = "update categories disabled = '$disabled' where id = '$id' limit 1"			
+				$query = "update categories disabled = '$disabled' where id = '$id' limit 1";			
 				$DB->write($query);
 
 				$arr['message'] = "";

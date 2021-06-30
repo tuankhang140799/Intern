@@ -42,9 +42,9 @@
 	                  	  	  <!--add new category-->
 	                  	  	  <div class="add_new hide">
                                 <!-- BASIC FORM ELELEMNTS -->
-
+                              
                                           <h4 class="mb"><i class="fa fa-angle-right"></i> Add New Category</h4>
-                                          <form class="form-horizontal style-form" method="get">
+                                          <form class="form-horizontal style-form" method="post">
                                               <div class="form-group">
                                                   <label class="col-sm-2 col-sm-2 control-label">Category Name</label>
                                                   <div class="col-sm-10">
@@ -53,7 +53,7 @@
                                               </div>
                                               <button class="btn btn-primary" style="position: absolute;bottom:10px; right:10px;">Save</button>
                                           </form>
-                                
+                                   
                                   <br><br> 
                                 <button type="button" class="btn btn-warning" onclick="show_add_new(event)" style="position: absolute;bottom:10px; left:10px;">Close</button>
                                 <button type="button" class="btn btn-primary" onclick="collect_data(event)" style="position: absolute;bottom:10px; right:10px;">Save</button>
@@ -69,7 +69,7 @@
                                               <div class="form-group">
                                                   <label class="col-sm-2 col-sm-2 control-label">Category Name</label>
                                                   <div class="col-sm-10">
-                                                      <input id="category_edit" name="category" type="text" class="form-control" autofocus required>
+                                                      <input id="category_edit" name="category" type="text" class="form-control" autofocus>
                                                   </div>
                                               </div>
                                               <button class="btn btn-primary" style="position: absolute;bottom:10px; right:10px;">Save</button>
@@ -92,10 +92,7 @@
                               </tr>
                               </thead>
                               <tbody id="table_body">
-
                                 <?= $tbl_rows?>
-                              
-                              
                               </tbody>
                           </table>
                       </div><!-- /content-panel -->
@@ -104,19 +101,20 @@
 
 <script type="text/javascript">
 	
-	function show_add_new() {
-        var show_edit_box = document.querySelector(".edit_category");
+	  function show_add_new() {
+        var show_add_box = document.querySelector(".add_new");
         var category_input = document.querySelector("#category");
-        if(show_edit_box.classList.contains("hide")){
 
-            show_edit_box.classList.remove("hide");
+        if(show_add_box.classList.contains("hide")){
+
+            show_add_box.classList.remove("hide");
             category_input.focus();
         }
         else {
-            show_edit_box.classList.add("hide");
+            show_add_box.classList.add("hide");
             category_input.value = "";
         }
-    }
+    } 
 
     function show_edit_category(id,category,e) {
         var show_add_box = document.querySelector(".edit_category");
@@ -159,7 +157,7 @@
        
         ajax.addEventListener('readystatechange', function(){
 
-            if(ajax.readyState == 4 && ajax.Status == 200)
+            if(ajax.readyState == 4 && ajax.status == 200)
             {
                 handle_result(ajax.responseText);
             }
@@ -227,13 +225,12 @@
         });
     }
 
-    function disable_row(id,state)
-    {
+    function disable_row(id,state) {
         send_data({
-          data_type: "disable_row",
-          id:id,
-          current_state:
-        });
+            data_type: "disable_row",
+            id:id,
+            current_state: state
+        })
     }
 
 </script>
